@@ -1,8 +1,7 @@
-// src/api/auth.ts
+
 
 const API_URL = "https://dummyjson.com/auth";
 
-// ==================== TYPES ====================
 
 export interface LoginCredentials {
   username: string;
@@ -28,9 +27,9 @@ export interface AuthResponse extends User {
   refreshToken: string;
 }
 
-// ==================== API FUNCTIONS ====================
 
-// 🔐 LOGIN
+
+//  LOGIN
 export const loginUserAPI = async (
   userData: LoginCredentials
 ): Promise<AuthResponse> => {
@@ -49,7 +48,7 @@ export const loginUserAPI = async (
 
   const data: AuthResponse = await response.json();
 
-  // ✅ Store tokens and user data
+  //  Store tokens and user data
   localStorage.setItem("accessToken", data.accessToken);
   localStorage.setItem("refreshToken", data.refreshToken);
   localStorage.setItem("user", JSON.stringify(data));
@@ -57,7 +56,7 @@ export const loginUserAPI = async (
   return data;
 };
 
-// 👤 GET CURRENT USER
+//  GET CURRENT USER
 export const getCurrentUserAPI = async (): Promise<User> => {
   const token = localStorage.getItem("accessToken");
 

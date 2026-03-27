@@ -1,30 +1,31 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import LoginPage from "./features/auth/page/loginPage";
-import CommentsPage from "./features/manage-post/CommentPage";
-import ProtectedRoute from "./features/auth/ProtectedRoute";
-function App(): JSX.Element {
+import LoginPage from "@/features/auth/pages/loginPage";
+
+import ProtectedRoute from "../src/routes/ProtectedRoute";
+
+function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Default Route - Redirect to login */}
+        {/* Default Redirect */}
         <Route path="/" element={<Navigate to="/login" replace />} />
 
-        {/* Public Routes */}
+        {/* Public Route */}
         <Route path="/login" element={<LoginPage />} />
 
-        {/* Protected Routes */}
+        {/* Protected Route */}
         <Route
-          path="/comments"  // Changed to lowercase + kebab-case (better practice)
+          path="/comments"
           element={
             <ProtectedRoute>
-              <CommentsPage />
+                <h1>Comments Page - Protected</h1>
             </ProtectedRoute>
           }
         />
 
-        {/* Optional: Catch-all route for 404 */}
-        {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
+        {/* 404 Fallback */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );

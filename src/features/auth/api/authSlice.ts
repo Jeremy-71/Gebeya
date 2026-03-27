@@ -5,7 +5,7 @@ import {
   logoutUserAPI,
 } from "./authService";
 
-// ==================== TYPES ====================
+
 
 interface User {
   id?: string;
@@ -25,7 +25,7 @@ interface AuthState {
   message: string;
 }
 
-// ==================== INITIAL STATE ====================
+
 
 const initialState: AuthState = {
   user: JSON.parse(localStorage.getItem("user") || "null"),
@@ -105,6 +105,14 @@ const authSlice = createSlice({
         state.user = action.payload;
         state.accessToken = action.payload.accessToken || null;
         state.refreshToken = action.payload.refreshToken || null;
+        // Persist to localStorage
+        localStorage.setItem("user", JSON.stringify(action.payload));
+        if (action.payload.accessToken) {
+          localStorage.setItem("accessToken", action.payload.accessToken);
+        }
+        if (action.payload.refreshToken) {
+          localStorage.setItem("refreshToken", action.payload.refreshToken);
+        }
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -112,7 +120,7 @@ const authSlice = createSlice({
         state.message = action.payload as string;
       })
 
-      // 👤 GET CURRENT USER
+      //  GET CURRENT USER
       .addCase(getCurrentUser.pending, (state) => {
         state.isLoading = true;
       })
@@ -126,13 +134,17 @@ const authSlice = createSlice({
         state.message = action.payload as string;
       })
 
-      // 🚪 LOGOUT
+      //  LOGOUT
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
         state.accessToken = null;
         state.refreshToken = null;
         state.isError = false;
         state.message = "";
+        // Clear localStorage
+        localStorage.removeItem("user");
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
       });
   },
 });
