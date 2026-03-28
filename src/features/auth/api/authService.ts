@@ -1,6 +1,6 @@
 
 
-const API_URL = "https://dummyjson.com/auth";
+const BASE_URL = "https://dummyjson.com/auth";
 
 
 export interface LoginCredentials {
@@ -33,7 +33,7 @@ export interface AuthResponse extends User {
 export const loginUserAPI = async (
   userData: LoginCredentials
 ): Promise<AuthResponse> => {
-  const response = await fetch(`${API_URL}/login`, {
+  const response = await fetch(`${BASE_URL}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -64,7 +64,7 @@ export const getCurrentUserAPI = async (): Promise<User> => {
     throw new Error("No access token found. Please login again.");
   }
 
-  const response = await fetch(`${API_URL}/me`, {
+  const response = await fetch(`${BASE_URL}/me`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -78,7 +78,7 @@ export const getCurrentUserAPI = async (): Promise<User> => {
   return response.json();
 };
 
-// 🚪 LOGOUT
+//  LOGOUT
 export const logoutUserAPI = (): void => {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");

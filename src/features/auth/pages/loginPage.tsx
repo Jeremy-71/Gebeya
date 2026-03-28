@@ -35,7 +35,7 @@ function LoginPage() {
   // ✅ Auto redirect if logged in
   useEffect(() => {
     if (accessToken) {
-      navigate("/comments");
+      navigate("/ProductPage");
     }
   }, [accessToken, navigate]);
 
@@ -60,7 +60,7 @@ function LoginPage() {
 
       // ✅ cleaner way using unwrap (recommended)
       if (loginUser.fulfilled.match(resultAction)) {
-        navigate("/comments");
+        navigate("/");
       }
 
     } catch (error) {

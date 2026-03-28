@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import LoginPage from "@/features/auth/pages/loginPage";
-
+import ProductPage from "./features/products/pages/ProductPage";
 import ProtectedRoute from "../src/routes/ProtectedRoute";
 
 function App() {
@@ -16,16 +16,16 @@ function App() {
 
         {/* Protected Route */}
         <Route
-          path="/comments"
+          path="/ProductPage"
           element={
             <ProtectedRoute>
-                <h1>Comments Page - Protected</h1>
+               <ProductPage/>
             </ProtectedRoute>
           }
         />
 
         {/* 404 Fallback */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
       </Routes>
     </BrowserRouter>
   );
