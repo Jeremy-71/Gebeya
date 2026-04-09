@@ -1,13 +1,14 @@
 // ProductDialog.tsx
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedProduct } from "@/features/products/api/ProductSlice";
-
+import{Card} from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import productStats from "./ProductStats";
 
 export default function ProductDialog() {
   const dispatch = useDispatch();
@@ -16,6 +17,8 @@ export default function ProductDialog() {
   if (!selectedProduct) return null;
 
   return (
+   
+
     <Dialog
       open={!!selectedProduct}
       onOpenChange={() => dispatch(setSelectedProduct(null))}
@@ -23,6 +26,7 @@ export default function ProductDialog() {
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>{selectedProduct.title}</DialogTitle>
+          
         </DialogHeader>
 
         <p>{selectedProduct.description}</p>
@@ -32,6 +36,11 @@ export default function ProductDialog() {
           <p>Rating: {selectedProduct.rating}</p>
           <p>Brand: {selectedProduct.brand}</p>
           <p>Stock: {selectedProduct.stock}</p>
+        </div>
+        <div>
+           <Card>
+            <img src={selectedProduct.images[0]} alt="" />
+           </Card>
         </div>
 
         {/* Reviews */}

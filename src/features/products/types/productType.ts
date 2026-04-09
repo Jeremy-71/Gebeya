@@ -19,6 +19,7 @@ export interface ProductsResponse {
       height: number;
       depth: number;
     };
+    images:string[];
 
     warrantyInformation: string;
     shippingInformation: string;
@@ -37,4 +38,5 @@ export interface ProductsResponse {
   total?: number;
   skip?: number;
   limit?: number;
+
 }

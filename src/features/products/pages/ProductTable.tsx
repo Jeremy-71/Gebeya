@@ -13,6 +13,7 @@ export default function ProductTable(){
     <Table>
       <TableHeader>
         <TableRow>
+           <TableHead>Image</TableHead>
           <TableHead>Product</TableHead>
           <TableHead>Category</TableHead>
           <TableHead>Price</TableHead>
